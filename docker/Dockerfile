@@ -32,7 +32,7 @@ RUN \
 EXPOSE 3000
 EXPOSE 8080
 
-ADD build/libs/verifi.jar app.jar
+ADD build/libs/devopsDemo.jar app.jar
 
 COPY docker/entrypoint.sh entrypoint.sh
 COPY docker/healthCheck.sh healthCheck.sh
