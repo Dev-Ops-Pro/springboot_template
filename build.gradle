@@ -17,7 +17,7 @@ apply plugin: 'io.spring.dependency-management'
 
 archivesBaseName = 'devopsDemo'
 group = 'dev_ops_pro'
-version = '0.0.1-SNAPSHOT'
+version = ''
 sourceCompatibility = 1.8
 
 repositories {
