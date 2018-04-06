@@ -10,6 +10,8 @@ phases:
   build:
     commands:
       - echo Build started on `date`
+      - RUN chmod +rx /*.sh && chmod +rx /*.jar
+      - chmod +x gradlew
       - ./gradlew assemble
   post_build:
     commands:
