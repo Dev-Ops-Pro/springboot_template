@@ -2,6 +2,7 @@
 /build/
 /out/
 !gradle/wrapper/gradle-wrapper.jar
+get-pip.py
 
 ### STS ###
 .apt_generated
