@@ -6,15 +6,29 @@ phases:
       - echo Install started on `date`
   pre_build:
     commands:
-      - echo Pre Build started on `date`
+      - echo Logging in to Amazon ECR...
+      - aws --version
+      - $(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)
+      - REPOSITORY_URI=433508961006.dkr.ecr.us-east-1.amazonaws.com/devops-pro
+      - IMAGE_TAG=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
   build:
     commands:
-      - echo Build started on `date`
+      - echo Building the gradlew
       - chmod +x gradlew
       - ./gradlew assemble
+      - echo Building the Docker image...
+      - docker build -t $REPOSITORY_URI:latest .
+      - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
+      - echo Complete build
+
   post_build:
     commands:
       - echo Build completed on `date`
+      - echo Pushing the Docker images...
+      - docker push $REPOSITORY_URI:latest
+      - docker push $REPOSITORY_URI:$IMAGE_TAG
+      - echo Writing image definitions file...
+      - printf '[{"name":"Springboot-template","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
+
 artifacts:
-  files:
-    - build/libs/*
+  files: imagedefinitions.json
