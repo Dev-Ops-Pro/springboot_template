@@ -1,6 +1,6 @@
 FROM fabric8/java-centos-openjdk8-jdk
 
-EXPOSE 8080
+EXPOSE 8081
 
 ADD build/libs/devopsDemo.jar app.jar
 
