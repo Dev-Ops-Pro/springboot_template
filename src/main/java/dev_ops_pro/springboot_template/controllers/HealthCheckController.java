@@ -9,6 +9,6 @@ public class HealthCheckController {
 
     @RequestMapping(value = "/healthCheck", method = RequestMethod.GET)
     public String getHealthStatus(){
-        return "Feeling healthy";
+        return "Feeling healthy!";
     }
 }
